@@ -1,11 +1,16 @@
 {
-  "name": "pj_pet_get",
+  "name": "helpdeskti",
   "version": "1.0.0",
-  "description": "",
+  "description": "API para gerenciamento de demandas de suporte técnico",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./server.js localhost 5000"
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "criar-admin": "node scripts/criar-admin.js",
+    "build:usuarios": "node --check models/Users.js && node --check controllers/userController.js && node --check helpers/userValidator.js && node --check routes/userRotues.js",
+    "build:autenticacao": "node --check helpers/create-user-token.js && node --check helpers/verify-token.js && node --check helpers/verify-admin.js",
+    "build:demandas": "node --check models/Demandas.js && node --check controllers/demandaController.js && node --check routes/demandaRoutes.js",
+    "build": "npm run build:usuarios && npm run build:autenticacao && npm run build:demandas && node --check db/conn.js && node --check scripts/criar-admin.js && node --check server.js"
   },
   "keywords": [],
   "author": "",

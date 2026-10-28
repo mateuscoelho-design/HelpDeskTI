@@ -7,22 +7,29 @@ const conn = require('../db/conn')
 const User = conn.define('users',{
     name:{
         type: DataTypes.STRING,
-        required: true
+        allowNull: false
     },
     email:{
         type: DataTypes.STRING,
-        required: true
+        allowNull: false,
+        unique: true
     },
     password:{
         type: DataTypes.STRING,
-        required: true
+        allowNull: false
     },
     image:{
         type: DataTypes.STRING,
     },
     phone:{
         type: DataTypes.STRING,
-        required: true
+        allowNull: false
+    },
+    //tipo de usuário usado na autorização
+    tipo:{
+        type: DataTypes.ENUM('admin', 'funcionario'),
+        allowNull: false,
+        defaultValue: 'funcionario'
     }
 })
 

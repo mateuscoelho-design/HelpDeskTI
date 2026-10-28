@@ -6,10 +6,16 @@ const jwt = require('jsonwebtoken')
 const createUserToken = async(user, req, res)=>{
     const token = jwt.sign({
         name: user.name,
-        id: user.id
-    }, process.env.CHAVETOKEN)
+        id: user.id,
+        tipo: user.tipo
+    }, process.env.CHAVETOKEN, {expiresIn: '8h'})
 
     //retornamos o token
-    res.status(200).json({token:token})
+    res.status(200).json({
+        token: token,
+        tipo: user.tipo,
+        name: user.name
+    })
 }
+
 module.exports = createUserToken
